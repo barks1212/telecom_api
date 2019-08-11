@@ -4,14 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/jest/bin/jest.js ./"
+    "test": "node_modules/jest/bin/jest.js ./",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "eslint": "^6.1.0",
-    "jest": "^24.8.0"
+    "jest": "^24.8.0",
+    "supertest": "^4.0.2"
   },
   "dependencies": {
     "express": "^4.17.1"
