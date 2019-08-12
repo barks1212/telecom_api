@@ -71,6 +71,32 @@ describe('Telecom Provider', () => {
             const result = [91011, 121314];
             expect(actual).toEqual(result);
         })
+    });
 
+    describe('activate number', () => {
+        const customers = [{
+            id: '1',
+            phoneNumbers: [{
+                number: '1234',
+                active: false
+            }],
+        }];
+
+        const provider = teleComProvider(customers);
+
+        it('should throw an error if customer phone number does not exist', () => {
+            expect(() => provider.activateNumber('1', 'no exist')).toThrow();
+        })
+
+        it('should update when phone number exists', () => {
+            const customerId = '1';
+            const number = '1234';
+
+            provider.activateNumber(customerId, number);
+
+            const updatedCustomer = provider.getNumberById(customerId); 
+            expect(updatedCustomer.phoneNumbers.find(n => n.number === number).activated).toBe(true);
+            
+        })
     })
 });
