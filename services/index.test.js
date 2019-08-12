@@ -94,8 +94,7 @@ describe('Telecom Provider', () => {
 
             provider.activateNumber(customerId, number);
 
-            const updatedCustomer = provider.getNumberById(customerId); 
-            expect(updatedCustomer.phoneNumbers.find(n => n.number === number).activated).toBe(true);
+            expect(customers[0].phoneNumbers[0].active).toBe(true);
             
         })
     })
