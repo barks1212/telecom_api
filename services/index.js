@@ -18,9 +18,14 @@ const telecomProvider = (customerData = []) => ({
         const customer = getCustomer(customerData, id);
         return customer.phoneNumbers.map(num => num.number);
     },
-    activateNumber: id => {
-        const result = getCustomer(customerData, id);
-        return result;
+    activateNumber: (id, phoneNumber) => {
+        const customer = getCustomer(customerData, id);
+        const number = customer.phoneNumbers.find(num => num.number === phoneNumber);
+
+        if(!number) {
+            throw new NumberNotFound();
+        }
+        number.activated = true;
     }
 });
 
@@ -28,6 +33,13 @@ class CustomerNotFound extends Error {
     constructor(message) {
         super(message);
         this.name = "CustomerNotFound";
+    }
+}
+
+class NumberNotFound extends Error {
+    constructor(message){
+        super(message);
+        this.name = "NumberNotFound";
     }
 }
 

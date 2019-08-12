@@ -78,7 +78,7 @@ describe('Telecom Provider', () => {
             id: '1',
             phoneNumbers: [{
                 number: '1234',
-                active: false
+                activated: false
             }],
         }];
 
@@ -94,7 +94,7 @@ describe('Telecom Provider', () => {
 
             provider.activateNumber(customerId, number);
 
-            expect(customers[0].phoneNumbers[0].active).toBe(true);
+            expect(customers[0].phoneNumbers[0].activated).toBe(true);
             
         })
     })
