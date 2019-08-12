@@ -49,7 +49,7 @@ describe('activateNumber', () => {
         let activeNumberById;
 
         beforeAll(() => {
-            activeNumberById = request.put('/numbers/4/activate/077077077');
+            activeNumberById = request.patch('/numbers/4/activate/077077077');
         })
 
         it('should return 404', () => {
@@ -63,12 +63,10 @@ describe('activateNumber', () => {
         })
     })
 
-    describe('Given customer exist', () => {
-
-        let activeNumberById;
+    describe('Given customer exists', () => {
 
         it('should return 404 when phone number doesnt exist', () => {
-            request.put('/numbers/1/activate/077077077').expect(404);
+            request.patch('/numbers/1/activate/077077077').expect(404);
         })
     })
 });
