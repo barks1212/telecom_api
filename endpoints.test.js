@@ -14,21 +14,20 @@ describe('getNumberById', () => {
     })
 
     describe('Given customer doesnt exist', () => {
-
-        let getNumberById;
-
-        beforeAll(() => {
-            getNumberById = request.get('/numbers/4');
+        it('should return a 404 and correct error message', done => {
+            request.get('/numbers/4')
+                .expect(404)
+                .then(res => {
+                    expect(res.body).toEqual({name: 'CustomerNotFound'})
+                    done();
+                })
         })
+    })
 
-        it('should return 404', () => {
-            getNumberById.expect(404);
-        })
-        it('return correct error message', done => {
-            getNumberById.then(res => {
-                expect(res.body).toEqual({name: 'CustomerNotFound'})
-                done();
-            });
+    describe('Success', () => {
+        it('should return 200 status', () => {
+            request.get('/numbers/1')
+            .expect(200);
         })
     })
 });
@@ -65,4 +64,11 @@ describe('activateNumber', () => {
                 })
         })
     })
+    
+    describe('Success', () => {
+        it('should return 204 status', () => {
+            request.patch('/numbers/1/activate/1234')
+            .expect(204);
+        })
+    });
 });
