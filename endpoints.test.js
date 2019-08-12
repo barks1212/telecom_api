@@ -2,6 +2,18 @@ const endpoints = require('./endpoints');
 const express = require('express');
 const app = express();
 
+describe('getNumbers', () => {
+    beforeAll(() => {
+        endpoints(app)
+        request = require('supertest')(app);
+    });
+    describe('Success', () => {
+        it('should return 200 status', done => {
+            request.get('/numbers').expect(200, done);
+        })
+    })
+})
+
 describe('getNumberById', () => {
 
     beforeAll(() => {
@@ -10,12 +22,12 @@ describe('getNumberById', () => {
     })
     
     it('should 404 when passed incorrect path', done => {
-        request.get('/numbers/not-a-number').expect(404, done);
+        request.get('/customers/not-a-number/numbers').expect(404, done);
     })
 
     describe('Given customer doesnt exist', () => {
         it('should return a 404 and correct error message', done => {
-            request.get('/numbers/4')
+            request.get('/customers/4/numbers')
                 .expect(404)
                 .then(res => {
                     expect(res.body).toEqual({name: 'CustomerNotFound'})
@@ -25,9 +37,9 @@ describe('getNumberById', () => {
     })
 
     describe('Success', () => {
-        it('should return 200 status', () => {
-            request.get('/numbers/1')
-            .expect(200);
+        it('should return 200 status', done => {
+            request.get('/customers/1/numbers')
+            .expect(200, done);
         })
     })
 });
@@ -40,12 +52,12 @@ describe('activateNumber', () => {
     })
     
     it('should 404 when passed incorrect path', done => {
-        request.get('/numbers/not-a-number/activate/077077077').expect(404, done);
+        request.get('/customers/not-a-number/numbers/activate/077077077').expect(404, done);
     })
 
     describe('Given customer doesnt exist', () => {
         it('should return a 404 and correct error message', done => {
-            request.patch('/numbers/4/activate/077077077')
+            request.patch('/customers/4/numbers/activate/077077077')
             .expect(404)
             .then(res => {
                 expect(res.body).toEqual({name: 'CustomerNotFound'})
@@ -56,7 +68,7 @@ describe('activateNumber', () => {
 
     describe('Given customer exists', () => {
         it('should return 404 and correct error message', done => {
-            request.patch('/numbers/1/activate/test')
+            request.patch('/customers/1/numbers/activate/test')
                 .expect(404)
                 .then(res => {
                     expect(res.body).toEqual({name: 'NumberNotFound'})
@@ -66,9 +78,9 @@ describe('activateNumber', () => {
     })
     
     describe('Success', () => {
-        it('should return 204 status', () => {
-            request.patch('/numbers/1/activate/1234')
-            .expect(204);
+        it('should return 204 status', done => {
+            request.patch('/customers/1/numbers/activate/1234')
+            .expect(204, done);
         })
     });
 });
