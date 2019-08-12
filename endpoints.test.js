@@ -64,9 +64,21 @@ describe('activateNumber', () => {
     })
 
     describe('Given customer exists', () => {
+        let activeNumberById;
+
+        beforeAll(() => {
+            activeNumberById = request.patch('/numbers/1/activate/test');
+        })
 
         it('should return 404 when phone number doesnt exist', () => {
-            request.patch('/numbers/1/activate/077077077').expect(404);
+            activeNumberById.expect(404);
+        })
+
+        it('should return correct error message', done => {
+            activeNumberById.then(res => {
+                expect(res.body).toEqual({name: 'NumberNotFound'})
+                done();
+            })
         })
     })
 });
