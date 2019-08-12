@@ -1,22 +1,22 @@
 [{
     "id": "1",
     "phoneNumbers": [{
-        "number": 1234,
+        "number": "1234",
         "activated": false
     },
     {
-        "number": 5678,
+        "number": "5678",
         "activated": false
     }]
 },
 {
     "id": "2",
     "phoneNumbers": [{
-        "number": 91011,
+        "number": "91011",
         "activated": false
     },
     {
-        "number": 121314,
+        "number": "121314",
         "activated": false
     }]
 }]
