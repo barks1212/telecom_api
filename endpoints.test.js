@@ -45,40 +45,24 @@ describe('activateNumber', () => {
     })
 
     describe('Given customer doesnt exist', () => {
-
-        let activeNumberById;
-
-        beforeAll(() => {
-            activeNumberById = request.patch('/numbers/4/activate/077077077');
-        })
-
-        it('should return 404', () => {
-            activeNumberById.expect(404);
-        })
-        it('return correct error message', done => {
-            activeNumberById.then(res => {
+        it('should return a 404 and correct error message', done => {
+            request.patch('/numbers/4/activate/077077077')
+            .expect(404)
+            .then(res => {
                 expect(res.body).toEqual({name: 'CustomerNotFound'})
                 done();
-            });
+            })
         })
-    })
+    });
 
     describe('Given customer exists', () => {
-        let activeNumberById;
-
-        beforeAll(() => {
-            activeNumberById = request.patch('/numbers/1/activate/test');
-        })
-
-        it('should return 404 when phone number doesnt exist', () => {
-            activeNumberById.expect(404);
-        })
-
-        it('should return correct error message', done => {
-            activeNumberById.then(res => {
-                expect(res.body).toEqual({name: 'NumberNotFound'})
-                done();
-            })
+        it('should return 404 and correct error message', done => {
+            request.patch('/numbers/1/activate/test')
+                .expect(404)
+                .then(res => {
+                    expect(res.body).toEqual({name: 'NumberNotFound'})
+                    done();
+                })
         })
     })
 });
