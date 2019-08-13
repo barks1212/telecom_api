@@ -16,49 +16,57 @@ describe('Telecom Provider', () => {
             expect(result.length).toBe(0);
         });
 
-        it ('should return all phone numbers', () => {
+        it('should return all phone numbers', () => {
             const customers = [{
-                phoneNumbers: [{
-                    number: 1234,
+                    phoneNumbers: [{
+                            number: '1234',
+                        },
+                        {
+                            number: '5678',
+                        }
+                    ],
                 },
                 {
-                    number: 5678,
-                }],
-            },
-            {
-                phoneNumbers: [{
-                    number: 91011
-                },
-                {
-                    number: 121314
-                }],
-            }];
+                    phoneNumbers: [{
+                            number: '91011'
+                        },
+                        {
+                            number: '121314'
+                        }
+                    ],
+                }
+            ];
+
+
             const provider = teleComProvider(customers);
             const actual = provider.getAll();
-            const result = [1234, 5678, 91011, 121314]
+            const result = ['1234', '5678', '91011', '121314']
             expect(actual).toEqual(result);
         })
     });
 
     describe('get all phone numbers of a single customer ', () => {
         const customers = [{
-            id: '1',
-            phoneNumbers: [{
-                number: 1234,
+                id: '1',
+                phoneNumbers: [{
+                        number: '1234',
+                    },
+                    {
+                        number: '5678',
+                    }
+                ],
             },
             {
-                number: 5678,
-            }],
-        },
-        {
-            id: '2',
-            phoneNumbers: [{
-                number: 91011
-            },
-            {
-                number: 121314
-            }],
-        }];
+                id: '2',
+                phoneNumbers: [{
+                        number: '91011'
+                    },
+                    {
+                        number: '121314'
+                    }
+                ],
+            }
+        ];
 
         const provider = teleComProvider(customers);
 
@@ -68,7 +76,7 @@ describe('Telecom Provider', () => {
         it('should return the numbers belonging to the passed customer id', () => {
 
             const actual = provider.getNumberById('2')
-            const result = [91011, 121314];
+            const result = ['91011', '121314'];
             expect(actual).toEqual(result);
         })
     });
@@ -95,7 +103,7 @@ describe('Telecom Provider', () => {
             provider.activateNumber(customerId, number);
 
             expect(customers[0].phoneNumbers[0].activated).toBe(true);
-            
+
         })
     })
 });
