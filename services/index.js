@@ -15,7 +15,7 @@ const telecomProvider = (customerData = []) => ({
     ),
     getNumberById: (id) => {
         const customer = getCustomer(customerData, id);
-        return customer.phoneNumbers.map(num => num.number);
+        return customer.phoneNumbers
     },
     activateNumber: (id, phoneNumber) => {
         const customer = getCustomer(customerData, id);
