@@ -52,22 +52,16 @@ describe('Telecom Provider', () => {
         const customers = [{
                 id: '1',
                 phoneNumbers: [{
-                        number: '1234',
-                    },
-                    {
-                        number: '5678',
-                    }
-                ],
+                    number: '5678',
+                    activated: true
+                }],
             },
             {
                 id: '2',
                 phoneNumbers: [{
-                        number: '91011'
-                    },
-                    {
-                        number: '121314'
-                    }
-                ],
+                    number: '91011',
+                    activated: false
+                }, ],
             }
         ];
 
@@ -78,8 +72,12 @@ describe('Telecom Provider', () => {
         })
         it('should return the numbers belonging to the passed customer id', () => {
 
+            const result = [{
+                number: '91011',
+                activated: false
+            }]
+
             const actual = provider.getNumberById('2')
-            const result = ['91011', '121314'];
             expect(actual).toEqual(result);
         })
     });
