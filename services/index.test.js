@@ -19,28 +19,31 @@ describe('Telecom Provider', () => {
         it('should return all phone numbers', () => {
             const customers = [{
                     phoneNumbers: [{
-                            number: '1234',
-                        },
-                        {
-                            number: '5678',
-                        }
-                    ],
+                        number: '1234',
+                        activated: false
+                    }, ],
                 },
                 {
                     phoneNumbers: [{
-                            number: '91011'
-                        },
-                        {
-                            number: '121314'
-                        }
-                    ],
+                        number: '91011',
+                        activated: true
+                    }, ],
                 }
             ];
+
+            const result = [{
+                    number: '1234',
+                    activated: false
+                },
+                {
+                    number: '91011',
+                    activated: true
+                }
+            ]
 
 
             const provider = teleComProvider(customers);
             const actual = provider.getAll();
-            const result = ['1234', '5678', '91011', '121314']
             expect(actual).toEqual(result);
         })
     });
